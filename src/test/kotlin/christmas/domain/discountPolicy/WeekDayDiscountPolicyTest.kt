@@ -49,4 +49,22 @@ class WeekDayDiscountPolicyTest {
 
     }
 
+    @Test
+    fun 평일_에는_동일한_디저트_메뉴가__각각_1개씩_있으면_1개만_할인_받는다() {
+        val orderFoods = listOf<OrderFood>(
+            OrderFood(2, Food.Appetizer.타파스),
+            OrderFood(1, Food.Dessert.초코케이크),
+            OrderFood(1, Food.Dessert.초코케이크),
+            OrderFood(1, Food.Dessert.아이스크림),
+            OrderFood(1, Food.Main.크리스마스파스타)
+        )
+        val weekDayDiscountMoney = WeekDayDiscountPolicy.discount(orderFoods)
+
+        assertEquals(4046, weekDayDiscountMoney)
+
+    }
+
+    // 디저트 메뉴를 각각 1개씩 시켰을떄
+    // 초코케이크 1개 , 초코케이크 1개
+
 }
