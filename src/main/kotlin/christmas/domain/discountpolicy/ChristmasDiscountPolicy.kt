@@ -1,16 +1,19 @@
 package christmas.domain.discountpolicy
 
-object ChristmasDiscountPolicy {
+import christmas.domain.discountpolicy.DiscountConstants.BASE_DISCOUNT
 
-    private const val ONE_DAY = 1
+object ChristmasDiscountPolicy : DiscountPolicy {
 
-    fun discount(day: Int): Int {
+    private const val CHRISTMAS_DAY = 25
+    private const val START_DAY = 1
+    private const val DAILY_INCREASE = 100
 
-        if (day > 25) {
-            return 0
+    override fun discount(day: Int): Int {
+        if (day > CHRISTMAS_DAY) {
+            return DiscountConstants.NO_DISCOUNT
         }
 
-        return 1000 + (day - ONE_DAY) * 100
+        return BASE_DISCOUNT + (day - START_DAY) * DAILY_INCREASE
     }
 
 
