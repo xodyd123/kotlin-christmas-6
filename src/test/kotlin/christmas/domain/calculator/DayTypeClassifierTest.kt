@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import org.junit.jupiter.params.provider.ValueSource
+import kotlin.intArrayOf
 
 class DayTypeClassifierTest {
 
@@ -24,7 +25,7 @@ class DayTypeClassifierTest {
     @ParameterizedTest(name = "days={0} -> 일요일")
     @ValueSource(ints = [3, 10, 17, 24, 31])
     fun `일요일은_평일로_계산한다`(dayOfMonth: Int) {
-        v val days = DayTypeClassifier.classify(dayOfMonth)
+        val days = DayTypeClassifier.classify(dayOfMonth)
         assertEquals(DayType.WEEKDAY, days)
     }
 
