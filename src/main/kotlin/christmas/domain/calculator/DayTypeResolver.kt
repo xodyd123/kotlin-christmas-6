@@ -2,13 +2,13 @@ package christmas.domain.calculator
 
 object DayCalculator {
 
-    fun calculate(day: Int): Day {
+    fun calculate(day: Int): DayType {
         val calculatedDay = day % 7
         return when (calculatedDay) {
-            1 -> Day.WEEKEND
-            2 -> Day.WEEKEND
+            1 -> DayType.WEEKEND
+            2 -> DayType.WEEKEND
             else -> {
-                Day.WEEKDAY
+                DayType.WEEKDAY
             }
         }
     }
