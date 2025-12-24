@@ -1,5 +1,5 @@
 package christmas.domain.calculator
 
-enum class Day {
+enum class DayType {
     WEEKDAY, WEEKEND
 }
