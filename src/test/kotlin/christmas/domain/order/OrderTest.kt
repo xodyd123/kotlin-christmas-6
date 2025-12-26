@@ -68,4 +68,29 @@ class OrderTest {
         assertEquals(ErrorMessage.INVALID_ORDER.formatted, exception.message)
     }
 
+    @Test
+    fun `총_주문_금액이_10,000원_이상부터_할인_이벤트가_적용되지_않는다`() {
+        val order = Order.create(listOf(OrderFood(1, Food.Appetizer.타파스), OrderFood(1, Food.Drink.제로콜라)))
+        val isDiscountable = order.isDiscountable
+        assertFalse(isDiscountable)
+        assertEquals(8500, order.amount)
+    }
+
+    @Test
+    fun `총_주문_금액이_10,000원_이상부터_할인_이벤트가_적용된다`() {
+        val order = Order.create(listOf(OrderFood(2, Food.Appetizer.타파스)))
+        val isDiscountable = order.isDiscountable
+        assertTrue(isDiscountable)
+        assertEquals(11_000, order.amount)
+    }
+
+    @Test
+    fun `총_주문_금액이_정확히_10,000원일떄_할인_이벤트가_적용된다`() {
+        val order = Order.create(listOf(OrderFood(2, Food.Dessert.아이스크림)))
+        val isDiscountable = order.isDiscountable
+        assertTrue(isDiscountable)
+        assertEquals(10_000, order.amount)
+    }
+
+
 }

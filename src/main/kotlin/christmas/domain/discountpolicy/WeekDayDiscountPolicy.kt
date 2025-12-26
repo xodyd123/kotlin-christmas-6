@@ -7,7 +7,8 @@ import christmas.domain.order.OrderFood
 object WeekDayDiscountPolicy : DayDiscountPolicy {
 
     override fun discount(orderFood: List<OrderFood>): Int {
-        val dessertCount = orderFood.count { orderFood -> orderFood.food is Food.Dessert }
+        val dessertCount = orderFood.sumOf { if(it.food is Food.Dessert) it.count else 0 }
+
         return dessertCount * DAY_BASE_DISCOUNT
     }
 }

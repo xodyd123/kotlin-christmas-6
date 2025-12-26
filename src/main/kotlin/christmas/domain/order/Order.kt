@@ -5,7 +5,14 @@ import christmas.exception.ErrorMessage
 
 
 @JvmInline
-value class Order private constructor(private val orderFoods: List<OrderFood>) {
+value class Order private constructor(val orderFoods: List<OrderFood>) {
+
+    val amount: Int
+        get() = orderFoods.sumOf { orderFood -> orderFood.food.price * orderFood.count }
+
+    val isDiscountable: Boolean
+        get() = amount >= 10000
+
 
     init {
         require(orderFoods.any { orderFood -> orderFood.food !is Food.Drink }) { ErrorMessage.INVALID_ORDER.formatted }
