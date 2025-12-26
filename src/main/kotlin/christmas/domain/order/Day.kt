@@ -1,5 +1,7 @@
 package christmas.domain.order
 
+import christmas.domain.calculator.DayType
+import christmas.domain.calculator.DayTypeClassifier
 import christmas.exception.ErrorMessage
 
 @JvmInline
@@ -7,6 +9,7 @@ value class Day private constructor(private val dayOfMonth: Int) {
 
     init {
         require(dayOfMonth in 1..31) { ErrorMessage.INVALID_DAY_NUMBER.formatted }
+
 
     }
 
@@ -16,6 +19,10 @@ value class Day private constructor(private val dayOfMonth: Int) {
                 input.trim().toIntOrNull() ?: throw IllegalArgumentException(ErrorMessage.INVALID_DAY_NUMBER.formatted)
             return Day(value)
         }
+    }
+
+    fun classify(dayOfMonth: Int): DayType {
+        return DayTypeClassifier.classify(dayOfMonth)
     }
 
 }
