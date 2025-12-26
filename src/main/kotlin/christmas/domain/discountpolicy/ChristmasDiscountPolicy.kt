@@ -1,6 +1,7 @@
 package christmas.domain.discountpolicy
 
 import christmas.domain.discountpolicy.DiscountConstants.BASE_DISCOUNT
+import christmas.domain.order.Day
 
 object ChristmasDiscountPolicy : DiscountPolicy {
 
