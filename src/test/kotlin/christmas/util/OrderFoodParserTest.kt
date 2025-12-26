@@ -1,5 +1,6 @@
 package christmas.util
 
+import christmas.domain.order.OrderFood
 import christmas.exception.ErrorMessage
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
@@ -21,6 +22,9 @@ class OrderFoodParserTest {
     @ParameterizedTest(name = "메뉴판에 있는 메뉴={0}")
     @ValueSource(strings = ["제로콜라-1", "아이스크림-1"])
     fun `메뉴판에_있는_메뉴는_정상_작동`(foodName: String) {
+
+        val orderFoods: List<OrderFood> = OrderFoodParser.parseOrderFoods(foodName)
+        assertEquals(1, orderFoods.size)
         assertDoesNotThrow { OrderFoodParser.parseOrderFoods(foodName) }
 
     }
@@ -47,7 +51,7 @@ class OrderFoodParserTest {
 
     @Test
     fun `중복_메뉴_일경우_예외_발생한다`() {
-        val ex = assertThrows<IllegalArgumentException> { OrderFoodParser.parseOrderFoods("시저샐러드-1,시저샐러드-1") }
+        val ex = assertThrows<IllegalArgumentException> { OrderFoodParser.parseOrderFoods("시저샐러드-1,시저샐러드-2") }
         assertEquals(ErrorMessage.INVALID_ORDER.formatted, ex.message)
     }
 

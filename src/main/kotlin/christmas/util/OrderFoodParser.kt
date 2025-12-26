@@ -26,6 +26,7 @@ object OrderFoodParser {
 
             OrderFood(quantity, name)
         }
+        require(orderFood.map { it.food }.toSet().size == orderFood.size) { ErrorMessage.INVALID_ORDER.formatted }
         return orderFood
     }
 }
