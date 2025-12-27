@@ -2,6 +2,7 @@ package christmas.domain.discountPolicy
 
 import christmas.domain.discountpolicy.ChristmasDiscountPolicy
 import christmas.domain.menu.Food
+import christmas.domain.order.Day
 import christmas.domain.order.Order
 import christmas.domain.order.OrderFood
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -14,7 +15,7 @@ class ChristmasDiscountPolicyTest {
         val orderFoods = listOf<OrderFood>(OrderFood(2, Food.Main.크리스마스파스타))
         val order: Order = Order.create(orderFoods)
         val christmasDiscountPolicy = ChristmasDiscountPolicy
-        val discountMoney = christmasDiscountPolicy.discount(1, order)
+        val discountMoney = christmasDiscountPolicy.discount(Day.parse("1"), order)
         assertEquals(1000, discountMoney)
     }
 
@@ -23,7 +24,7 @@ class ChristmasDiscountPolicyTest {
         val orderFoods = listOf<OrderFood>(OrderFood(2, Food.Main.크리스마스파스타))
         val order: Order = Order.create(orderFoods)
         val christmasDiscountPolicy = ChristmasDiscountPolicy
-        val discountMoney = christmasDiscountPolicy.discount(2, order)
+        val discountMoney = christmasDiscountPolicy.discount(Day.parse("2"), order)
         assertEquals(1100, discountMoney)
     }
 
@@ -32,7 +33,7 @@ class ChristmasDiscountPolicyTest {
         val christmasDiscountPolicy = ChristmasDiscountPolicy
         val orderFoods = listOf<OrderFood>(OrderFood(2, Food.Main.크리스마스파스타))
         val order: Order = Order.create(orderFoods)
-        val discountMoney = christmasDiscountPolicy.discount(day = 3, order = order)
+        val discountMoney = christmasDiscountPolicy.discount(day = Day.parse("3"), order = order)
         assertEquals(1200, discountMoney)
     }
 
@@ -41,7 +42,7 @@ class ChristmasDiscountPolicyTest {
         val christmasDiscountPolicy = ChristmasDiscountPolicy
         val orderFoods = listOf<OrderFood>(OrderFood(2, Food.Main.크리스마스파스타))
         val order: Order = Order.create(orderFoods)
-        val discountMoney = christmasDiscountPolicy.discount(day = 25, order = order)
+        val discountMoney = christmasDiscountPolicy.discount(day = Day.parse("25"), order = order)
         assertEquals(3400, discountMoney)
     }
 
@@ -50,7 +51,7 @@ class ChristmasDiscountPolicyTest {
         val christmasDiscountPolicy = ChristmasDiscountPolicy
         val orderFoods = listOf<OrderFood>(OrderFood(2, Food.Main.크리스마스파스타))
         val order: Order = Order.create(orderFoods)
-        val discountMoney = christmasDiscountPolicy.discount(26, order)
+        val discountMoney = christmasDiscountPolicy.discount(Day.parse("26"), order)
         assertEquals(0, discountMoney)
     }
 }

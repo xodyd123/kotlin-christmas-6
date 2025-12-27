@@ -1,8 +1,8 @@
 package christmas.domain.discountPolicy
 
-import christmas.domain.discountpolicy.WeekDayDiscountPolicy
 import christmas.domain.discountpolicy.WeekendDiscountPolicy
 import christmas.domain.menu.Food
+import christmas.domain.order.Day
 import christmas.domain.order.Order
 import christmas.domain.order.OrderFood
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -19,7 +19,7 @@ class WeekendDiscountPolicyTest {
         )
         val order = Order.create(orderFoods)
 
-        val weekDayDiscountMoney = WeekendDiscountPolicy.discount(2, order)
+        val weekDayDiscountMoney = WeekendDiscountPolicy.discount(Day.parse("2"), order)
 
         assertEquals(2023, weekDayDiscountMoney)
 
@@ -35,7 +35,7 @@ class WeekendDiscountPolicyTest {
             OrderFood(1, Food.Main.티본스테이크)
         )
         val order = Order.create(orderFoods)
-        val weekDayDiscountMoney = WeekendDiscountPolicy.discount(2, order)
+        val weekDayDiscountMoney = WeekendDiscountPolicy.discount(Day.parse("2"), order)
 
         assertEquals(4046, weekDayDiscountMoney)
 

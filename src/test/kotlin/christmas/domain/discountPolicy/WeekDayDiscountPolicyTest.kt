@@ -2,6 +2,7 @@ package christmas.domain.discountPolicy
 
 import christmas.domain.discountpolicy.WeekDayDiscountPolicy
 import christmas.domain.menu.Food
+import christmas.domain.order.Day
 import christmas.domain.order.Order
 import christmas.domain.order.OrderFood
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -17,7 +18,7 @@ class WeekDayDiscountPolicyTest {
             OrderFood(1, Food.Main.크리스마스파스타)
         )
         val order = Order.create(orderFoods)
-        val weekDayDiscountMoney = WeekDayDiscountPolicy.discount(3, order)
+        val weekDayDiscountMoney = WeekDayDiscountPolicy.discount(Day.parse("3"), order)
 
         assertEquals(2023, weekDayDiscountMoney)
 
@@ -32,7 +33,7 @@ class WeekDayDiscountPolicyTest {
             OrderFood(1, Food.Main.크리스마스파스타)
         )
         val order = Order.create(orderFoods)
-        val weekDayDiscountMoney = WeekDayDiscountPolicy.discount(3, order)
+        val weekDayDiscountMoney = WeekDayDiscountPolicy.discount(Day.parse("3"), order)
 
         assertEquals(0, weekDayDiscountMoney)
 
@@ -47,7 +48,7 @@ class WeekDayDiscountPolicyTest {
             OrderFood(1, Food.Main.크리스마스파스타)
         )
         val order = Order.create(orderFoods)
-        val weekDayDiscountMoney = WeekDayDiscountPolicy.discount(3, order)
+        val weekDayDiscountMoney = WeekDayDiscountPolicy.discount(Day.parse("3"), order)
 
         assertEquals(6069, weekDayDiscountMoney)
 
