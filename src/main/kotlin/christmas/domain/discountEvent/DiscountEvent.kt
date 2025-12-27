@@ -10,15 +10,13 @@ import christmas.domain.order.Day
 import christmas.domain.order.Order
 
 object DiscountEvent {
-    private val datePolicies = listOf<DiscountPolicy>(ChristmasDiscountPolicy, SpecialDiscountPolicy)
+    private val datePolicies = listOf<DiscountPolicy>(
+        ChristmasDiscountPolicy, SpecialDiscountPolicy,
+        WeekendDiscountPolicy, WeekDayDiscountPolicy)
 
     fun totalDiscount(day: Day, order: Order): Int {
-        val dayTypeDiscount = when (day.classify()) {
-            DayType.WEEKDAY -> WeekDayDiscountPolicy.discount(order.orderFoods)
-            DayType.WEEKEND -> WeekendDiscountPolicy.discount(order.orderFoods)
-        }
-        val dateDiscount = datePolicies.sumOf { it.discount(day.dayOfMonth) }
-        return dateDiscount + dayTypeDiscount
+        val discount = datePolicies.sumOf { it.discount(day.dayOfMonth, order) }
+        return discount
     }
 
 }
