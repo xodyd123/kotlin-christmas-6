@@ -1,0 +1,10 @@
+package christmas.view
+
+import camp.nextstep.edu.missionutils.Console
+
+object InputView {
+
+    fun read(): String {
+        return Console.readLine()
+    }
+}
