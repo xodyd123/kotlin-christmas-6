@@ -54,5 +54,20 @@ class WeekDayDiscountPolicyTest {
 
     }
 
+    @Test
+    fun `25일이_지나면_디저트_메뉴_1개당_할인_받지못한다`() {
+        val orderFoods = listOf<OrderFood>(
+            OrderFood(2, Food.Appetizer.타파스),
+            OrderFood(2, Food.Dessert.초코케이크),
+            OrderFood(1, Food.Dessert.아이스크림),
+            OrderFood(1, Food.Main.크리스마스파스타)
+        )
+        val order = Order.create(orderFoods)
+        val weekDayDiscountMoney = WeekDayDiscountPolicy.discount(Day.parse("26"), order)
+
+        assertEquals(0, weekDayDiscountMoney)
+
+    }
+
 
 }

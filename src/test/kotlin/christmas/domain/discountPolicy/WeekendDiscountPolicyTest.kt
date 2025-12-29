@@ -41,4 +41,19 @@ class WeekendDiscountPolicyTest {
 
     }
 
+    @Test
+    fun `25일이_지나면_주말_할인_받지못한다`() {
+        val orderFoods = listOf<OrderFood>(
+            OrderFood(2, Food.Appetizer.타파스),
+            OrderFood(1, Food.Dessert.아이스크림),
+            OrderFood(1, Food.Main.크리스마스파스타),
+            OrderFood(1, Food.Main.티본스테이크)
+        )
+        val order = Order.create(orderFoods)
+        val weekDayDiscountMoney = WeekendDiscountPolicy.discount(Day.parse("29"), order)
+
+        assertEquals(0, weekDayDiscountMoney)
+
+    }
+
 }

@@ -2,6 +2,7 @@ package christmas.domain.order
 
 import christmas.domain.menu.Food
 import christmas.exception.ErrorMessage
+import christmas.service.OrderMenu
 
 
 @JvmInline
@@ -12,6 +13,9 @@ value class Order private constructor(val orderFoods: List<OrderFood>) {
 
     val isDiscountable: Boolean
         get() = amount >= 10000
+
+    val ordersMenu: List<OrderMenu>
+        get() = orderFoods.map { orderFood -> OrderMenu(orderFood.count, orderFood.food.foodName) }
 
 
     init {
