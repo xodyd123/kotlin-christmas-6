@@ -4,6 +4,8 @@ import christmas.domain.discountpolicy.DiscountConstants.BASE_DISCOUNT
 import christmas.domain.discountpolicy.DiscountConstants.NO_DISCOUNT
 import christmas.domain.order.Day
 import christmas.domain.order.Order
+import christmas.service.DiscountEventDto
+import christmas.service.Event
 
 object SpecialDiscountPolicy : DiscountPolicy {
 
@@ -15,5 +17,15 @@ object SpecialDiscountPolicy : DiscountPolicy {
             return BASE_DISCOUNT
 
         return NO_DISCOUNT
+    }
+
+    override fun discountResult(
+        day: Day,
+        order: Order
+    ): DiscountEventDto? {
+        if (specialDays.contains(day))
+            return DiscountEventDto(event = Event.SPECIAL, -BASE_DISCOUNT)
+
+        return null
     }
 }

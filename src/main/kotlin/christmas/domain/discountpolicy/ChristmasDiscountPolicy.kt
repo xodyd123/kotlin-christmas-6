@@ -3,6 +3,8 @@ package christmas.domain.discountpolicy
 import christmas.domain.discountpolicy.DiscountConstants.BASE_DISCOUNT
 import christmas.domain.order.Day
 import christmas.domain.order.Order
+import christmas.service.DiscountEventDto
+import christmas.service.Event
 
 object ChristmasDiscountPolicy : DiscountPolicy {
 
@@ -18,5 +20,17 @@ object ChristmasDiscountPolicy : DiscountPolicy {
         return BASE_DISCOUNT + (day.dayOfMonth - START_DAY) * DAILY_INCREASE
     }
 
+    override fun discountResult(
+        day: Day,
+        order: Order
+    ): DiscountEventDto? {
+
+        if (day.dayOfMonth > CHRISTMAS_DAY) {
+            return null
+        }
+
+        val discountPrice: Int = -(BASE_DISCOUNT + (day.dayOfMonth - START_DAY) * DAILY_INCREASE)
+        return DiscountEventDto(Event.CHRISTMAS, discountPrice)
+    }
 
 }
